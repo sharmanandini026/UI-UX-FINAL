@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Programs</title>
+</head>
+<body>
+
+    <h2>FORM FIELDS</h2>
+
+    <form onsubmit="return FormCheck()">
+        Name: <input type="text" id="name"><br><br>
+        Email: <input type="email" id="mail"><br><br>
+        Age: <input type="number" id="age"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+
+        // 1. Arithmetic Operations
+
+        let num1 = Number(prompt("Please enter number 1"));
+        let num2 = Number(prompt("Please enter number 2"));
+
+        document.write("<h3>Arithmetic Operations</h3>");
+        document.write("Sum: " + (num1 + num2) + "<br>");
+        document.write("Difference: " + (num1 - num2) + "<br>");
+        document.write("Product: " + (num1 * num2) + "<br>");
+
+        if (num2 !== 0) {
+            document.write("Quotient: " + (num1 / num2) + "<br>");
+        } else {
+            document.write("Division by zero is not possible<br>");
+        }
+
+
+        // 2. Array Operations
+
+        let arr = [0, 5, 10, 15, 20];
+
+        document.write("<h3>Array Operations</h3>");
+
+        let largest = Math.max(...arr);
+        let smallest = Math.min(...arr);
+
+        document.write("Array: " + arr + "<br>");
+        document.write("Largest: " + largest + "<br>");
+        document.write("Smallest: " + smallest + "<br>");
+
+        let ascending = [...arr].sort((a, b) => a - b);
+        let descending = [...arr].sort((a, b) => b - a);
+
+        document.write("Ascending: " + ascending + "<br>");
+        document.write("Descending: " + descending + "<br>");
+
+
+        // 3. Form Validation
+
+        function FormCheck() {
+
+            let x = document.getElementById("name");
+            let y = document.getElementById("mail");
+            let z = document.getElementById("age");
+
+            if (x.value.trim() === "") {
+                alert("Name is empty");
+                return false;
+            }
+
+            let email = y.value.trim();
+
+            let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!pattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            if (z.value === "" || Number(z.value) < 18 || Number(z.value) > 100) {
+                alert("Age is faulty. Enter between 18 and 100 only");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+
+
+        // 4. Student Object
+
+        let student = {
+            name: "Nandini",
+            age: 19,
+            grades: 75
+        };
+
+        student.class = "B.Tech";
+        student.grades = 95;
+
+        document.write("<h3>Student Information</h3>");
+
+        document.write("Name: " + student.name + "<br>");
+        document.write("Age: " + student.age + "<br>");
+        document.write("Grade: " + student.grades + "<br>");
+        document.write("Class: " + student.class + "<br>");
+
+
+        // 5. Array Methods: filter(), map(), reduce()
+
+        function somethings() {
+
+            let even = arr.filter(n => n % 2 === 0);
+
+            let doubled = even.map(n => n * 2);
+
+            let sum = doubled.reduce((a, b) => a + b, 0);
+
+            document.write("<h3>Array Methods</h3>");
+            document.write("Original Array: " + arr + "<br>");
+            document.write("Even Numbers: " + even + "<br>");
+            document.write("Doubled Numbers: " + doubled + "<br>");
+            document.write("Sum: " + sum + "<br>");
+
+            return sum;
+        }
+
+        console.log("Final Sum:", somethings());
+
+    </script>
+
+</body>
+</html>

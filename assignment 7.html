@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+</head>
+
+<body>
+
+    <h1>To-Do List</h1>
+
+    <input type="text" id="title" placeholder="Enter task title">
+    <br><br>
+
+    <textarea id="description" placeholder="Enter task description"></textarea>
+    <br><br>
+
+    <button onclick="addTask()">Add Task</button>
+
+    <div id="taskList"></div>
+
+    <script>
+
+        function addTask() {
+
+            let title = document.getElementById("title").value;
+            let description = document.getElementById("description").value;
+
+            if (title == "" || description == "") {
+                alert("Please enter all details");
+                return;
+            }
+
+            let task = document.createElement("div");
+
+            let h3 = document.createElement("h3");
+            h3.innerText = title;
+
+            let p = document.createElement("p");
+            p.innerText = description;
+
+            // Mark as Completed button
+            let complete = document.createElement("button");
+            complete.innerText = "Mark as Completed";
+
+            complete.onclick = function() {
+
+                h3.classList.toggle("completed");
+                p.classList.toggle("completed");
+
+                if (complete.innerText == "Mark as Completed") {
+                    complete.innerText = "Mark as Incomplete";
+                }
+                else {
+                    complete.innerText = "Mark as Completed";
+                }
+            };
+
+            // Edit button
+            let edit = document.createElement("button");
+            edit.innerText = "Edit";
+
+            edit.onclick = function() {
+
+                let newTitle = document.createElement("input");
+                newTitle.value = h3.innerText;
+
+                let newDescription = document.createElement("textarea");
+                newDescription.value = p.innerText;
+
+                task.replaceChild(newTitle, h3);
+                task.replaceChild(newDescription, p);
+
+                edit.innerText = "Save";
+
+                edit.onclick = function() {
+
+                    h3.innerText = newTitle.value;
+                    p.innerText = newDescription.value;
+
+                    task.replaceChild(h3, newTitle);
+                    task.replaceChild(p, newDescription);
+
+                    edit.innerText = "Edit";
+
+                    edit.onclick = editTask;
+                };
+            };
+
+            // Delete button
+            let del = document.createElement("button");
+            del.innerText = "Delete";
+
+            del.onclick = function() {
+                task.remove();
+            };
+
+            function editTask() {
+
+                let newTitle = document.createElement("input");
+                newTitle.value = h3.innerText;
+
+                let newDescription = document.createElement("textarea");
+                newDescription.value = p.innerText;
+
+                task.replaceChild(newTitle, h3);
+                task.replaceChild(newDescription, p);
+
+                edit.innerText = "Save";
+
+                edit.onclick = function() {
+                    h3.innerText = newTitle.value;
+                    p.innerText = newDescription.value;
+
+                    task.replaceChild(h3, newTitle);
+                    task.replaceChild(p, newDescription);
+
+                    edit.innerText = "Edit";
+                    edit.onclick = editTask;
+                };
+            }
+
+            task.appendChild(h3);
+            task.appendChild(p);
+            task.appendChild(complete);
+            task.appendChild(edit);
+            task.appendChild(del);
+
+            document.getElementById("taskList").appendChild(task);
+
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+        }
+
+    </script>
+
+</body>
+</html>
